@@ -9,17 +9,22 @@ public class TrebuchetTest {
 
     @Test
     public void testTrebuchet() {
-        Trebuchet trebuchet = new Trebuchet(fileLocation + "test.txt");
-        int calibrationSum = trebuchet.calibrate();
+        int calibrationSum = Trebuchet.calibrate(fileLocation + "test.txt");
 
         assertEquals(122, calibrationSum);
     }
 
     @Test
     public void testTrebuchetExample() {
-        Trebuchet trebuchet = new Trebuchet(fileLocation + "example.txt");
-        int calibrationSum = trebuchet.calibrate();
+        int calibrationSum = Trebuchet.calibrate(fileLocation + "example.txt");
 
         assertEquals(142, calibrationSum);
+    }
+
+    @Test
+    public void testTrebuchetExample2() {
+        int calibrationSum = Trebuchet.calibrate(fileLocation + "example2.txt");
+
+        assertEquals(281, calibrationSum);
     }
 }
