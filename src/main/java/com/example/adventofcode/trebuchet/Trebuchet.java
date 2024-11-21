@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trebuchet {
+    private final String fileLocation = "src/main/java/com/example/adventofcode/trebuchet/";
     private String fileName;
 
     public Trebuchet(String fileName) {
@@ -13,7 +14,7 @@ public class Trebuchet {
 
     public int calibrate() {
         int calibrationValue = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName)))  {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileLocation + fileName)))  {
             String line;
             while ((line = br.readLine()) != null) {
                 List<String> digits = findDigits(line);
@@ -22,7 +23,7 @@ public class Trebuchet {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading file " + fileName + ": " + e.getMessage());
+            System.err.println("Error reading file " + fileName + "at" + fileLocation + ": " + e.getMessage());
         }
 
         return calibrationValue;
