@@ -15,13 +15,9 @@ public class CubeConundrum {
         int possibleGameIds = 0;
 
         String inputFileString = FileUtils.readFileToString(inputFile);
-
         for (String gameString : inputFileString.trim().split("\n")) {
-            System.out.println(gameString.split(":")[0]);
             possibleGameIds += calculate(gameString);
         }
-
-//        System.out.println(possibleGameIds);
 
         return possibleGameIds;
     }
@@ -32,19 +28,14 @@ public class CubeConundrum {
         String gameSets = gameString.split(":")[1].trim();
 
         for (String gameSet : gameSets.split("; ")) {
-//            System.out.println("-----");
-            gameSet = gameSet.trim();
-//            System.out.println(gameSet);
-            for (String gameData : gameSet.split(",")) {
-                gameData = gameData.trim();
+            for (String gameData : gameSet.trim().split(",")) {
                 gameData = gameData.trim();
                 int amount = Integer.parseInt(gameData.split(" ")[0]);
                 String colorName = gameData.split(" ")[1].trim();
-//                System.out.println(gameData);
 
-                if (colorName.equals("red") && amount > bag.redCubes() ||
-                colorName.equals("blue") && amount > bag.blueCubes() ||
-                colorName.equals("green") && amount > bag.greenCubes()) {
+                if ((colorName.equals("red") && amount > bag.redCubes()) ||
+                        (colorName.equals("blue") && amount > bag.blueCubes()) ||
+                        (colorName.equals("green") && amount > bag.greenCubes())) {
                     return 0;
                 }
             }
@@ -58,7 +49,6 @@ public class CubeConundrum {
         );
 
         int possibleGames = cubeConundrum.determine("day02/input.txt");
-
         System.out.println("Possible gameIds sum: " + possibleGames);
     }
 }
