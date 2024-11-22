@@ -11,7 +11,7 @@ public class CubeConundrum {
         this.bag = bag;
     }
 
-    public int determine(String inputFile) {
+    public int determinePossibleGameIds(String inputFile) {
         int possibleGameIds = 0;
 
         String inputFileString = FileUtils.readFileToString(inputFile);
@@ -48,7 +48,7 @@ public class CubeConundrum {
                 new CubeHolder(12, 13, 14)
         );
 
-        int possibleGames = cubeConundrum.determine("day02/input.txt");
+        int possibleGames = cubeConundrum.determinePossibleGameIds("day02/input.txt");
         System.out.println("Possible gameIds sum: " + possibleGames);
     }
 }
