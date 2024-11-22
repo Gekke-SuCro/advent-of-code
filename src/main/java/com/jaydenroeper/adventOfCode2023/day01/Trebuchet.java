@@ -14,14 +14,11 @@ public class Trebuchet {
     public static int calibrate(String filePath) {
         int calibrationValue = 0;
 
-//        try (BufferedReader br = new BufferedReader(new FileReader(filePath)))  {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                calibrationValue += calibrateTwoDigitNumber(line);
-//            }
-//        } catch (IOException e) {
-//            System.err.println("Error reading file: " + e.getMessage());
-//        }
+        String fileString = FileUtils.readFileToString(filePath);
+
+        for (String line : fileString.split("\n")) {
+            calibrationValue += calibrateTwoDigitNumber(line);
+        }
 
         return calibrationValue;
     }
