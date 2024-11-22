@@ -1,11 +1,11 @@
-package com.jaydenroeper.advent.year2023.day01;
+package com.jaydenroeper.adventOfCode2023.day01;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class TrebuchetTest {
-    private final String fileLocation = "src/test/java/com/example/adventofcode/trebuchet/";
+    private final String fileLocation = "src/test/java/com/jaydenroeper/adventOfCode2023/day01/";
 
     @Test
     public void testTrebuchet() {

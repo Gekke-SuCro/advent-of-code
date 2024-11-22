@@ -1,4 +1,4 @@
-package com.jaydenroeper.advent.year2023.day01;
+package com.jaydenroeper.adventOfCode2023.day01;
 
 public enum StringNumber {
     ONE(1),

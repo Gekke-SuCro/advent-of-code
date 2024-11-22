@@ -1,4 +1,4 @@
-package com.jaydenroeper.advent.year2023.day01;
+package com.jaydenroeper.adventOfCode2023.day01;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class Trebuchet {
     }
 
     public static void main(String[] args) {
-        int calibrationSum = Trebuchet.calibrate("src/main/java/com/example/adventofcode/trebuchet/input.txt");
+        int calibrationSum = Trebuchet.calibrate("src/main/java/com/jaydenroeper/adventOfCode2023/day01/input.txt");
 
         System.out.println("Calibration sum: " + calibrationSum);
     }
