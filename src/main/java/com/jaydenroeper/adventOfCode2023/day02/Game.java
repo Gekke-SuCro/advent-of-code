@@ -8,6 +8,10 @@ public class Game extends CubeHolder {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public static Game toGame(int id, String sets) {
 //        System.out.println(sets);
         int redCubes = 0;
