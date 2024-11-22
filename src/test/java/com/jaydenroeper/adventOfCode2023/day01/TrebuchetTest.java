@@ -14,14 +14,14 @@ public class TrebuchetTest {
 
     @Test
     public void testTrebuchetExample() {
-        int calibrationSum = Trebuchet.calibrate("example.txt");
+        int calibrationSum = Trebuchet.calibrate("day01/example.txt");
 
         assertEquals(142, calibrationSum);
     }
 
     @Test
     public void testTrebuchetExample2() {
-        int calibrationSum = Trebuchet.calibrate( "example2.txt");
+        int calibrationSum = Trebuchet.calibrate( "day01/example2.txt");
 
         assertEquals(281, calibrationSum);
     }
