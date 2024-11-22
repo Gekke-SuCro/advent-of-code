@@ -23,11 +23,17 @@ public class Game extends CubeHolder {
 //                System.out.println(color + " : " + amount);
 
                 if (color.equals("red")) {
-                    redCubes += amount;
+                    if (amount > redCubes) {
+                        redCubes = amount;
+                    }
                 } else if (color.equals("green")) {
-                    greenCubes += amount;
+                    if (amount > greenCubes) {
+                        greenCubes = amount;
+                    }
                 } else if (color.equals("blue")) {
-                    blueCubes += amount;
+                    if (amount > blueCubes) {
+                        blueCubes = amount;
+                    }
                 }
             }
         }

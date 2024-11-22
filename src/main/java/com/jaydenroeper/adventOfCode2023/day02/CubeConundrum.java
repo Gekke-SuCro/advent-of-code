@@ -16,8 +16,6 @@ public class CubeConundrum {
     }
 
     public int determinePossibleGames(String inputFile) {
-        int possibleGames = 0;
-
         String inputFileString = FileUtils.readFileToString(inputFile);
 
 //        Load games from input file to a list of games
@@ -25,11 +23,24 @@ public class CubeConundrum {
             readGame(game.trim());
         }
 
+        int sumGameIds = 0;
+        List<Game> possibleGames = new ArrayList<>();
+
+
         for (Game game : games) {
-            System.out.println("Game: " + game);
+            if (game.getRedCubes() > bag.getRedCubes() ||
+                    game.getGreenCubes() > bag.getGreenCubes() ||
+                    game.getBlueCubes() > bag.getBlueCubes()) {
+                continue;
+            }
+
+            possibleGames.add(game);
+            sumGameIds += game.getId();
         }
 
-        return possibleGames;
+        System.out.println(possibleGames);
+
+        return sumGameIds;
     }
 
     private void readGame(String gameString) {
@@ -48,7 +59,8 @@ public class CubeConundrum {
         );
 
         int possibleGames = cubeConundrum.determinePossibleGames("day02/example.txt");
-        System.out.println("Possible games: " + possibleGames);
+//        int possibleGames = cubeConundrum.determinePossibleGames("day02/input.txt");
+        System.out.println("Sum ids: " + possibleGames);
 
     }
 }
