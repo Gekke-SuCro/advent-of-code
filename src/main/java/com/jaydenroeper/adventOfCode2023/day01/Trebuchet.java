@@ -17,7 +17,7 @@ public class Trebuchet {
                 calibrationValue += calibrateTwoDigitNumber(line);
             }
         } catch (IOException e) {
-            System.err.println("Error reading file:" + e.getMessage());
+            System.err.println("Error reading file: " + e.getMessage());
         }
 
         return calibrationValue;
@@ -60,7 +60,7 @@ public class Trebuchet {
     }
 
     public static void main(String[] args) {
-        int calibrationSum = Trebuchet.calibrate("src/main/java/com/jaydenroeper/adventOfCode2023/day01/input.txt");
+        int calibrationSum = Trebuchet.calibrate("day01/input.txt");
 
         System.out.println("Calibration sum: " + calibrationSum);
     }
