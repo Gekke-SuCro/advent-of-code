@@ -1,4 +1,4 @@
-package com.example.adventofcode.trebuchet;
+package com.jaydenroeper.advent.year2023.day01;
 
 import java.io.*;
 import java.util.ArrayList;
