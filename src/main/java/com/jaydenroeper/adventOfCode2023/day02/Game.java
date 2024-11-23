@@ -8,7 +8,6 @@ public class Game {
 
     private final List<GameSet> gameSets = new ArrayList<>();
 
-
     public Game(int id) {
         this.id = id;
     }

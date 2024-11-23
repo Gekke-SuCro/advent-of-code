@@ -32,7 +32,7 @@ public class CubeConundrum {
 
     public int determinePossibleGameIds() {
         int gameIdsSum = 0;
-        List<Game> possibleGames = findPossibleGames();
+        List<Game> possibleGames = findGamesPossible();
 
         for (Game game : possibleGames) {
             gameIdsSum += game.getId();
@@ -41,15 +41,13 @@ public class CubeConundrum {
         return gameIdsSum;
     }
 
-    private List<Game> findPossibleGames() {
+    private List<Game> findGamesPossible() {
         List<Game> possibleGames = new ArrayList<>();
 
         for (Game game : games) {
             boolean possibleGameFound = true;
             for (GameSet gameSet : game.getGameSets()) {
-                if ((gameSet.cubes().redCubes() > bag.redCubes()) ||
-                        (gameSet.cubes().greenCubes() > bag.greenCubes()) ||
-                        (gameSet.cubes().blueCubes() > bag.blueCubes())) {
+                if (!gameSet.isWithinCubeHolder(bag)) {
                     possibleGameFound = false;
                     break;
                 }
@@ -62,7 +60,6 @@ public class CubeConundrum {
 
         return possibleGames;
     }
-
 
     public static void main(String[] args) {
         CubeConundrum cubeConundrum = new CubeConundrum(
