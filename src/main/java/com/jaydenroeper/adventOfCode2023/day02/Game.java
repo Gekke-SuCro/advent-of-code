@@ -20,6 +20,26 @@ public class Game {
         return gameSets;
     }
 
+    public CubeHolder calculateBiggestCubeHolder() {
+        int redCubes = 0;
+        int greenCubes = 0;
+        int blueCubes = 0;
+        for (GameSet gameSet : gameSets) {
+            CubeHolder gameCubeHolder = gameSet.cubes();
+            if (gameCubeHolder.redCubes() > redCubes) {
+                redCubes = gameCubeHolder.redCubes();
+            }
+            if (gameCubeHolder.greenCubes() > greenCubes) {
+                greenCubes = gameCubeHolder.greenCubes();
+            }
+            if (gameCubeHolder.blueCubes() > blueCubes) {
+                blueCubes = gameCubeHolder.blueCubes();
+            }
+        }
+
+        return new CubeHolder(redCubes, greenCubes, blueCubes);
+    }
+
     public void addGameSet(GameSet gameSet) {
         gameSets.add(gameSet);
     }

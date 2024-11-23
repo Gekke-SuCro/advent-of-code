@@ -41,6 +41,21 @@ public class CubeConundrum {
         return gameIdsSum;
     }
 
+    public int powerOfSets() {
+        int power = 0;
+
+        List<CubeHolder> minCubes = new ArrayList<>();
+        for (Game game : games) {
+            minCubes.add(game.calculateBiggestCubeHolder());
+        }
+
+        for (CubeHolder cubeHolder : minCubes) {
+            power += (cubeHolder.redCubes() * cubeHolder.greenCubes() * cubeHolder.blueCubes());
+        }
+
+        return power;
+    }
+
     private List<Game> findGamesPossible() {
         List<Game> possibleGames = new ArrayList<>();
 
@@ -71,6 +86,9 @@ public class CubeConundrum {
         System.out.println(games);
 //
         int possibleGames = cubeConundrum.determinePossibleGameIds();
+        int power = cubeConundrum.powerOfSets();
+
         System.out.println("Possible gameIds sum: " + possibleGames);
+        System.out.println("Power sum: " + power);
     }
 }
