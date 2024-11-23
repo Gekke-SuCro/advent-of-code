@@ -2,7 +2,9 @@ package com.jaydenroeper.adventOfCode2023.day03;
 
 import com.jaydenroeper.adventOfCode2023.utils.FileUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class GearRatios {
@@ -42,19 +44,36 @@ public class GearRatios {
     public int getSumOfPartNumbers() {
         int sum = 0;
 
+        List<String> numbers = new ArrayList<>();
+
         for (int i = 0; i < gearMatrix.length; i++) {
+            StringBuilder number = new StringBuilder();
+            boolean wasNumber = false;
             for (int j = 0; j < gearMatrix[i].length; j++) {
                 String s = gearMatrix[i][j];
                 char c = s.charAt(0);
 //                System.out.println(c + " digit:");
                 if (Character.isDigit(c)) {
-                    System.out.println("digit: " + c);
+                    number.append(s);
+//                    System.out.println("digit: " + c);
 
-                } else if (specialChars.contains(s)) {
+                    wasNumber = true;
+                } else {
+                    if (wasNumber) {
+                        numbers.add(number.toString());
+                        number = new StringBuilder();
+                    }
+
+                    wasNumber = false;
+                }
+
+                if (specialChars.contains(s)) {
                     System.out.println("special: " + s);
                 }
             }
         }
+
+        System.out.println(numbers);
 
         return sum;
     }
