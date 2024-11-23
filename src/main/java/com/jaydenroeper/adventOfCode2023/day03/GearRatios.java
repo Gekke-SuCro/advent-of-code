@@ -45,46 +45,46 @@ public class GearRatios {
         int sum = 0;
 
         List<String> numbers = new ArrayList<>();
+        List<String> adjacentNumbers = new ArrayList<>();
 
-        for (String[] matrix : gearMatrix) {
+        for (int i = 0; i < gearMatrix.length; i++) {
             StringBuilder number = new StringBuilder();
+            boolean isAdjacent = false;
             boolean wasNumber = false;
 
-            for (String s : matrix) {
+            for (int j = 0; j < gearMatrix[i].length; j++) {
+                String s = gearMatrix[i][j];
                 char c = s.charAt(0);
 //                System.out.println(c + " digit:");
                 if (Character.isDigit(c)) {
                     number.append(s);
 //                    System.out.println("digit: " + c);
+                    isAdjacent = isAdjacentToSymbol(s, i, j);
 
                     wasNumber = true;
                 } else {
                     if (wasNumber) {
+                        if (isAdjacent) {
+                            adjacentNumbers.add(number.toString());
+                            isAdjacent = false;
+                        }
                         numbers.add(number.toString());
                         number = new StringBuilder();
                     }
 
                     wasNumber = false;
                 }
-
-                if (specialChars.contains(s)) {
-                    System.out.println("special: " + s);
-                }
             }
         }
 
         System.out.println(numbers);
+        System.out.println(adjacentNumbers);
 
         return sum;
     }
 
-    private boolean isAdjacentToSymbol(int row, int col) {
-        for (int i = 0; i < gearMatrix.length; i++) {
-            for (int j = 0; j < gearMatrix[i].length; j++) {
-                String s = gearMatrix[i][j];
-            }
-        }
-
+    private boolean isAdjacentToSymbol(String digit, int row, int col) {
+        System.out.println("Checking if adjacent: " + digit + " " + row + " " + col);
         return false;
     }
 
