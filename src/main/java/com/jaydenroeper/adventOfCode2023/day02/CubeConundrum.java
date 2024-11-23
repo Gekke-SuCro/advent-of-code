@@ -3,52 +3,77 @@ package com.jaydenroeper.adventOfCode2023.day02;
 
 import com.jaydenroeper.adventOfCode2023.utils.FileUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CubeConundrum {
     private final CubeHolder bag;
+    private List<Game> games;
 
-    public CubeConundrum(CubeHolder bag) {
+    public CubeConundrum(CubeHolder bag, String inputFile) {
         this.bag = bag;
+        loadInputFile(inputFile);
     }
 
-    public int determinePossibleGameIds(String inputFile) {
-        int possibleGameIds = 0;
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void loadInputFile(String inputFile) {
+        games = new ArrayList<>();
 
         String inputFileString = FileUtils.readFileToString(inputFile);
         for (String gameString : inputFileString.trim().split("\n")) {
-            possibleGameIds += calculate(gameString);
+            Game game = Game.gameStringToGame(gameString);
+            games.add(game);
         }
-
-        return possibleGameIds;
     }
 
-    private int calculate(String gameString) {
-        gameString = gameString.trim();
-        int gameId = Integer.parseInt(gameString.split(":")[0].split(" ")[1]);
-        String gameSets = gameString.split(":")[1].trim();
+    public int determinePossibleGameIds() {
+        int gameIdsSum = 0;
+        List<Game> possibleGames = findPossibleGames();
 
-        for (String gameSet : gameSets.split("; ")) {
-            for (String gameData : gameSet.trim().split(",")) {
-                gameData = gameData.trim();
-                int amount = Integer.parseInt(gameData.split(" ")[0]);
-                String colorName = gameData.split(" ")[1].trim();
+        for (Game game : possibleGames) {
+            gameIdsSum += game.getId();
+        }
 
-                if ((colorName.equals("red") && amount > bag.redCubes()) ||
-                        (colorName.equals("blue") && amount > bag.blueCubes()) ||
-                        (colorName.equals("green") && amount > bag.greenCubes())) {
-                    return 0;
+        return gameIdsSum;
+    }
+
+    private List<Game> findPossibleGames() {
+        List<Game> possibleGames = new ArrayList<>();
+
+        for (Game game : games) {
+            boolean possibleGameFound = true;
+            for (GameSet gameSet : game.getGameSets()) {
+                if ((gameSet.getCubes().redCubes() > bag.redCubes()) ||
+                        (gameSet.getCubes().greenCubes() > bag.greenCubes()) ||
+                        (gameSet.getCubes().blueCubes() > bag.blueCubes())) {
+                    possibleGameFound = false;
+                    break;
                 }
             }
+
+            if (possibleGameFound) {
+                possibleGames.add(game);
+            }
         }
-        return gameId;
+
+        return possibleGames;
     }
+
 
     public static void main(String[] args) {
         CubeConundrum cubeConundrum = new CubeConundrum(
-                new CubeHolder(12, 13, 14)
+                new CubeHolder(12, 13, 14),
+                "day02/input.txt"
         );
 
-        int possibleGames = cubeConundrum.determinePossibleGameIds("day02/input.txt");
+        List<Game> games = cubeConundrum.getGames();
+        System.out.println(games);
+//
+        int possibleGames = cubeConundrum.determinePossibleGameIds();
         System.out.println("Possible gameIds sum: " + possibleGames);
     }
 }
