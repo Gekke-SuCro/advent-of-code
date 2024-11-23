@@ -46,11 +46,11 @@ public class GearRatios {
 
         List<String> numbers = new ArrayList<>();
 
-        for (int i = 0; i < gearMatrix.length; i++) {
+        for (String[] matrix : gearMatrix) {
             StringBuilder number = new StringBuilder();
             boolean wasNumber = false;
-            for (int j = 0; j < gearMatrix[i].length; j++) {
-                String s = gearMatrix[i][j];
+
+            for (String s : matrix) {
                 char c = s.charAt(0);
 //                System.out.println(c + " digit:");
                 if (Character.isDigit(c)) {
