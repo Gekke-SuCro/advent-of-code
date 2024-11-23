@@ -47,9 +47,9 @@ public class CubeConundrum {
         for (Game game : games) {
             boolean possibleGameFound = true;
             for (GameSet gameSet : game.getGameSets()) {
-                if ((gameSet.getCubes().redCubes() > bag.redCubes()) ||
-                        (gameSet.getCubes().greenCubes() > bag.greenCubes()) ||
-                        (gameSet.getCubes().blueCubes() > bag.blueCubes())) {
+                if ((gameSet.cubes().redCubes() > bag.redCubes()) ||
+                        (gameSet.cubes().greenCubes() > bag.greenCubes()) ||
+                        (gameSet.cubes().blueCubes() > bag.blueCubes())) {
                     possibleGameFound = false;
                     break;
                 }

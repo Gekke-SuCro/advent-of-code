@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private int id;
+    private final int id;
 
-    private List<GameSet> gameSets = new ArrayList<>();
+    private final List<GameSet> gameSets = new ArrayList<>();
 
 
     public Game(int id) {
