@@ -43,12 +43,10 @@ public class Game {
                 int amount = Integer.parseInt(gameData.split(" ")[0]);
                 String colorName = gameData.split(" ")[1].trim();
 
-                if (colorName.equals("red")) {
-                    redCubes = amount;
-                } else if (colorName.equals("green")) {
-                    greenCubes = amount;
-                } else if (colorName.equals("blue")) {
-                    blueCubes = amount;
+                switch (colorName) {
+                    case "red" -> redCubes = amount;
+                    case "green" -> greenCubes = amount;
+                    case "blue" -> blueCubes = amount;
                 }
             }
             GameSet gameSet = new GameSet(new CubeHolder(redCubes, greenCubes, blueCubes));
