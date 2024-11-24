@@ -3,6 +3,7 @@ package com.jaydenroeper.adventOfCode2023.day03;
 import com.jaydenroeper.adventOfCode2023.utils.FileUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GearRatios {
@@ -16,6 +17,7 @@ public class GearRatios {
 
     public GearRatios(String fileName) {
         loadEngineSchematic(fileName);
+//        System.out.println(Arrays.deepToString(gearMatrix));
     }
 
     public int getSumOfPartNumbers() {
@@ -35,26 +37,23 @@ public class GearRatios {
 
         for (int i = 0; i < gearMatrix.length; i++) {
             StringBuilder number = new StringBuilder();
-            boolean wasDigit = false;
             boolean isAdjacent = false;
 
             for (int j = 0; j < gearMatrix[i].length; j++) {
                 String part = gearMatrix[i][j];
                 boolean isDigit = Character.isDigit(part.charAt(0));
-                if (!isAdjacent) {
-                    isAdjacent = isAdjacent(part, i, j);
-                }
 
                 if (isDigit) {
+                    if (isAdjacent(part, i, j)) {
+                        isAdjacent = true;
+                    }
                     number.append(part);
-                    wasDigit = true;
                 } else {
-                    if (wasDigit && !isAdjacent) {
+                    if (isAdjacent) {
                         adjacentPartNumbers.add(number.toString());
                     }
-                    wasDigit = false;
-                    isAdjacent = false;
                     number = new StringBuilder();
+                    isAdjacent = false;
                 }
             }
         }
@@ -62,7 +61,7 @@ public class GearRatios {
         return adjacentPartNumbers;
     }
 
-    private boolean isAdjacent(String digit, int row, int col) {
+    public boolean isAdjacent(String digit, int row, int col) {
         List<String> adjacentChars = new ArrayList<>();
 
 //        Row above
@@ -95,7 +94,7 @@ public class GearRatios {
             adjacentChars.add(bottomLeft);
         } catch (ArrayIndexOutOfBoundsException _) {}
         try {
-            String bottom = gearMatrix[row - 1][col];
+            String bottom = gearMatrix[row + 1][col];
             adjacentChars.add(bottom);
         } catch (ArrayIndexOutOfBoundsException _) {}
         try {
@@ -103,9 +102,13 @@ public class GearRatios {
             adjacentChars.add(bottomRight);
         } catch (ArrayIndexOutOfBoundsException _) {}
 
+//        if (row == gearMatrix.length - 1 && col == gearMatrix[gearMatrix.length - 1].length - 1) {
+//            System.out.println("Digit: " + digit + " Neighbours: " + adjacentChars);
+//        }
+
         for (String c : adjacentChars) {
             boolean isSpecial = (!Character.isDigit(c.charAt(0)) && !c.equals("."));
-            System.out.println("Char: " + c + ", Row: " + row + ", Col: " + col + "isSpecial: " + isSpecial);
+//            System.out.println("Char: " + c + ", Row: " + row + ", Col: " + col + "isSpecial: " + isSpecial);
             if (isSpecial) {
                 return true;
             }
@@ -130,7 +133,7 @@ public class GearRatios {
     }
 
     public static void main(String[] args) {
-        String engineSchematic = FileUtils.readFileToString("day03/input.txt");
+        String engineSchematic = FileUtils.readFileToString("day03/example.txt");
 
         GearRatios gearRatios = new GearRatios(engineSchematic);
         int sum = gearRatios.getSumOfPartNumbers();
