@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GearRatios {
-    private static final String specialChars = "/*!@#$%^&*()\"{}_[]|\\?/<>,";
+    private static String specialChars = "*-$%+&/@=#";
 
     private String [][] gearMatrix;
 
@@ -49,12 +49,12 @@ public class GearRatios {
                     number.append(part);
                     wasDigit = true;
                 } else {
-                    if (wasDigit && isAdjacent) {
+                    if (wasDigit && !isAdjacent) {
                         adjacentPartNumbers.add(number.toString());
-                        number = new StringBuilder();
                     }
                     wasDigit = false;
                     isAdjacent = false;
+                    number = new StringBuilder();
                 }
             }
         }
@@ -104,7 +104,9 @@ public class GearRatios {
         } catch (ArrayIndexOutOfBoundsException _) {}
 
         for (String c : adjacentChars) {
-            if (specialChars.contains(c)) {
+            boolean isSpecial = (!Character.isDigit(c.charAt(0)) && !c.equals("."));
+            System.out.println("Char: " + c + ", Row: " + row + ", Col: " + col + "isSpecial: " + isSpecial);
+            if (isSpecial) {
                 return true;
             }
         }
@@ -127,9 +129,8 @@ public class GearRatios {
         }
     }
 
-
     public static void main(String[] args) {
-        String engineSchematic = FileUtils.readFileToString("day03/example.txt");
+        String engineSchematic = FileUtils.readFileToString("day03/input.txt");
 
         GearRatios gearRatios = new GearRatios(engineSchematic);
         int sum = gearRatios.getSumOfPartNumbers();
