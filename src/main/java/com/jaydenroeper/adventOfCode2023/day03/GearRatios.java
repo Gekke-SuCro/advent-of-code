@@ -3,12 +3,9 @@ package com.jaydenroeper.adventOfCode2023.day03;
 import com.jaydenroeper.adventOfCode2023.utils.FileUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GearRatios {
-    private static String specialChars = "*-$%+&/@=#";
-
     private String [][] gearMatrix;
 
     public GearRatios() {
@@ -44,11 +41,16 @@ public class GearRatios {
                 boolean isDigit = Character.isDigit(part.charAt(0));
 
                 if (isDigit) {
-                    if (isAdjacent(part, i, j)) {
+                    boolean partIsAdjacent = isAdjacent(part, i, j);
+                    if (partIsAdjacent) {
                         isAdjacent = true;
                     }
+                    System.out.println(part + " isAdjacent: " + partIsAdjacent);
                     number.append(part);
-                } else {
+                    System.out.println(number);
+                }
+
+                if (!isDigit || j >= gearMatrix[i].length - 1) {
                     if (isAdjacent) {
                         adjacentPartNumbers.add(number.toString());
                     }
@@ -133,7 +135,7 @@ public class GearRatios {
     }
 
     public static void main(String[] args) {
-        String engineSchematic = FileUtils.readFileToString("day03/example.txt");
+        String engineSchematic = FileUtils.readFileToString("day03/input.txt");
 
         GearRatios gearRatios = new GearRatios(engineSchematic);
         int sum = gearRatios.getSumOfPartNumbers();
