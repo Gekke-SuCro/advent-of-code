@@ -3,7 +3,6 @@ package com.jaydenroeper.adventOfCode2023.day03;
 import com.jaydenroeper.adventOfCode2023.utils.FileUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GearRatios {
@@ -55,6 +54,7 @@ public class GearRatios {
                         number = new StringBuilder();
                     }
                     wasDigit = false;
+                    isAdjacent = false;
                 }
             }
         }
@@ -63,7 +63,53 @@ public class GearRatios {
     }
 
     private boolean isAdjacent(String digit, int row, int col) {
-        return true;
+        List<String> adjacentChars = new ArrayList<>();
+
+//        Row above
+        try {
+            String topLeft = gearMatrix[row - 1][col - 1];
+            adjacentChars.add(topLeft);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+        try {
+            String top = gearMatrix[row - 1][col];
+            adjacentChars.add(top);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+        try {
+            String topRight = gearMatrix[row - 1][col + 1];
+            adjacentChars.add(topRight);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+
+//        Same row
+        try {
+            String left = gearMatrix[row][col - 1];
+            adjacentChars.add(left);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+        try {
+            String right = gearMatrix[row][col + 1];
+            adjacentChars.add(right);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+
+//        Row below
+        try {
+            String bottomLeft = gearMatrix[row + 1][col - 1];
+            adjacentChars.add(bottomLeft);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+        try {
+            String bottom = gearMatrix[row - 1][col];
+            adjacentChars.add(bottom);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+        try {
+            String bottomRight = gearMatrix[row + 1][col + 1];
+            adjacentChars.add(bottomRight);
+        } catch (ArrayIndexOutOfBoundsException _) {}
+
+        for (String c : adjacentChars) {
+            if (specialChars.contains(c)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void loadEngineSchematic(String engineSchematic) {
